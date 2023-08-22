@@ -1,16 +1,11 @@
 ﻿using AppLibrary;
-
-//using ItemGenerator.Contracts;
 using MassTransit;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ItemGenerator
+namespace ItemGeneratorApp
 {
     public class ItemGeneratorWorker : BackgroundService
     {
@@ -26,8 +21,8 @@ namespace ItemGenerator
             while (!stoppingToken.IsCancellationRequested)
             {
                 var item = new Item();
-                Console.WriteLine($"Item with Id {item.Id.ToString()} published.");
-                await _bus.Publish(item, stoppingToken);
+                Console.WriteLine($"Item Generator App: Published item with Id {item.Id.ToString()}.");
+                await _bus.Publish(item, stoppingToken); // Queue of name "item" is auto-created in RabbitMQ
 
                 await Task.Delay(1000, stoppingToken);
             }

@@ -1,24 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
 using MassTransit;
-using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
-namespace ItemGeneratorApp
+namespace ItemConsumerApp
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            await CreateHostBuilder(args).Build().RunAsync();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
+            IHost host = Host.CreateDefaultBuilder(args)
+                .ConfigureServices(services =>
                 {
                     services.AddMassTransit(x =>
                     {
@@ -51,8 +41,10 @@ namespace ItemGeneratorApp
                             cfg.ConfigureEndpoints(context);
                         });
                     });
+                })
+                .Build();
 
-                    services.AddHostedService<ItemGeneratorWorker>();
-                });
+            host.Run();
+        }
     }
 }
