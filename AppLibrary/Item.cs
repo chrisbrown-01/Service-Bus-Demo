@@ -11,5 +11,10 @@ namespace AppLibrary
             new Random().Next(1, 100), DateTime.Now)
         {
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}\nItemName: {ItemName}\nItemDescription: {ItemDescription}\nPrice: {Price}\nCreationDateTime: {CreationDateTime}";
+        }
     }
 }

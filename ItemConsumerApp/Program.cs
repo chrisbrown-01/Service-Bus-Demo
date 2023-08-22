@@ -1,3 +1,4 @@
+using ItemConsumerApp.Services;
 using MassTransit;
 using System.Reflection;
 
@@ -41,6 +42,9 @@ namespace ItemConsumerApp
                             cfg.ConfigureEndpoints(context);
                         });
                     });
+
+                    //services.AddScoped<IItemService, ItemService>();
+                    services.AddScoped<ItemService>(); // TODO: delete
                 })
                 .Build();
 

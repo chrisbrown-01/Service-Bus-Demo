@@ -1,4 +1,5 @@
 ﻿using AppLibrary;
+using ItemConsumerApp.Services;
 using MassTransit;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,23 @@ namespace ItemConsumerApp.Consumers
     public class ItemConsumer :
         IConsumer<Item>
     {
-        public Task Consume(ConsumeContext<Item> context)
+        private readonly IItemService _itemService;
+
+        public ItemConsumer(IItemService itemService)
+        {
+            _itemService = itemService;
+        }
+
+        public Task Consume(ConsumeContext<Item> context) // TODO: change to ItemCreatedEvent, see if queues are created accordingly
         {
             Console.WriteLine($"Item Consumer App: Consumed item with Id {context.Message.Id.ToString()}.");
+            Console.WriteLine();
+
+            //var item = new Item();
+            //_itemService.DisplayItem(item);
+            //Console.WriteLine("Adjusted price: " + _itemService.CalculateItemAdjustedPrice(item));
+            //Console.WriteLine();
+
             return Task.CompletedTask;
         }
     }
