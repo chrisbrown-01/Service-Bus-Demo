@@ -9,6 +9,7 @@ namespace ItemConsumerApp
     {
         private const string SEND_QUEUE1 = "Queue1";
 
+        [Obsolete]
         public static void Main(string[] args)
         {
             IHost host = Host.CreateDefaultBuilder(args)

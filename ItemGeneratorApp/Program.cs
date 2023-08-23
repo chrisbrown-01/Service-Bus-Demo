@@ -11,11 +11,13 @@ namespace ItemGeneratorApp
 {
     public class Program
     {
+        [Obsolete]
         public static async Task Main(string[] args)
         {
             await CreateHostBuilder(args).Build().RunAsync();
         }
 
+        [Obsolete]
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
