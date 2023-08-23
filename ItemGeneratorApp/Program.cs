@@ -53,8 +53,6 @@ namespace ItemGeneratorApp
 
                             cfg.UseInMemoryOutbox();
                         });
-
-                        // TODO: add outbox, redelivery
                     });
 
                     services.AddHostedService<ItemGeneratorWorker>();
