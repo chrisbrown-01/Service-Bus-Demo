@@ -20,7 +20,7 @@ namespace ItemConsumerApp.Consumers
             _itemService = itemService;
         }
 
-        public Task Consume(ConsumeContext<ItemCreated> context)
+        public async Task Consume(ConsumeContext<ItemCreated> context)
         {
             Console.WriteLine($"Item Consumer App: Consumed item with Id {context.Message.Id.ToString()}.");
             //Console.WriteLine();
@@ -30,21 +30,9 @@ namespace ItemConsumerApp.Consumers
             //Console.WriteLine("Adjusted price: " + _itemService.CalculateItemAdjustedPrice(itemCreated));
             //Console.WriteLine();
 
-            return Task.CompletedTask;
+            await Task.Delay(500);
+            Console.WriteLine($"Publishing ItemProcessed event for item Id {context.Message.Id.ToString()}.");
+            await context.Publish(new ItemProcessed(context.Message.Id));
         }
-
-        /*
-        class SubmitOrderConsumer :
-            IConsumer<SubmitOrder>
-        {
-            public async Task Consume(ConsumeContext<SubmitOrder> context)
-            {
-                await context.Publish<OrderSubmitted>(new
-                {
-                    context.Message.OrderId
-                });
-            }
-        }
-        */
     }
 }

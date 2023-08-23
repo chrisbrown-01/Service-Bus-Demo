@@ -18,8 +18,7 @@ namespace ItemConsumerApp
                     {
                         x.SetKebabCaseEndpointNameFormatter();
 
-                        // By default, sagas are in-memory, but should be changed to a durable
-                        // saga repository.
+                        // By default, sagas are in-memory, but should be changed to a durable saga repository.
                         x.SetInMemorySagaRepositoryProvider();
 
                         var entryAssembly = Assembly.GetEntryAssembly();
