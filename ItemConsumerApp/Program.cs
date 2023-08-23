@@ -48,6 +48,10 @@ namespace ItemConsumerApp
                             //{
                             //    e.ConfigureConsumer<ItemCreatedConsumer_SentQueue1>(context);
                             //});
+
+                            cfg.UseMessageRetry(r => r.Interval(3, 1));
+
+                            cfg.UseInMemoryOutbox();
                         });
                     });
 

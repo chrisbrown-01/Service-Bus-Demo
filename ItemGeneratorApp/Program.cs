@@ -48,6 +48,10 @@ namespace ItemGeneratorApp
                             });
 
                             cfg.ConfigureEndpoints(context);
+
+                            cfg.UseMessageRetry(r => r.Interval(3, 1));
+
+                            cfg.UseInMemoryOutbox();
                         });
 
                         // TODO: add outbox, redelivery
