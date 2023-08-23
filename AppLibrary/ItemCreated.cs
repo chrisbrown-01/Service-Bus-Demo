@@ -2,9 +2,9 @@
 
 namespace AppLibrary
 {
-    public record Item(Guid Id, string ItemName, string ItemDescription, int Price, DateTime CreationDateTime)
+    public record ItemCreated(Guid Id, string ItemName, string ItemDescription, int Price, DateTime CreationDateTime)
     {
-        public Item() : this(
+        public ItemCreated() : this(
             Guid.NewGuid(),
             new Faker().Internet.DomainName(),
             new Faker().Internet.Email(),

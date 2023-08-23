@@ -9,12 +9,12 @@ namespace ItemConsumerApp.Services
 {
     public class ItemService : IItemService
     {
-        public int CalculateItemAdjustedPrice(Item item)
+        public int CalculateItemAdjustedPrice(ItemCreated item)
         {
             return item.Price * 10;
         }
 
-        public void DisplayItem(Item item)
+        public void DisplayItem(ItemCreated item)
         {
             Console.WriteLine("Displaying item:");
             Console.WriteLine(item.ToString());

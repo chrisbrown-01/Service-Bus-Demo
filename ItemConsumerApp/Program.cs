@@ -1,3 +1,4 @@
+using ItemConsumerApp.Consumers;
 using ItemConsumerApp.Services;
 using MassTransit;
 using System.Reflection;
@@ -6,6 +7,8 @@ namespace ItemConsumerApp
 {
     public class Program
     {
+        private const string SEND_QUEUE1 = "Queue1";
+
         public static void Main(string[] args)
         {
             IHost host = Host.CreateDefaultBuilder(args)
@@ -40,11 +43,16 @@ namespace ItemConsumerApp
                             });
 
                             cfg.ConfigureEndpoints(context);
+
+                            // --- Not necessary, ConfigureEndpoints auto-creates a queue of different name. ---
+                            //cfg.ReceiveEndpoint(SEND_QUEUE1, e =>
+                            //{
+                            //    e.ConfigureConsumer<ItemCreatedConsumer_SentQueue1>(context);
+                            //});
                         });
                     });
 
-                    //services.AddScoped<IItemService, ItemService>();
-                    services.AddScoped<ItemService>(); // TODO: delete
+                    services.AddScoped<IItemService, ItemService>();
                 })
                 .Build();
 
